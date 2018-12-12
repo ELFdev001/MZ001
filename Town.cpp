@@ -4,15 +4,15 @@
 //	Email: genechng@gmail.com
 //	----------------------------------------------------------
 //
-//  The Army class prototype derives from Object
-//  Prototype details are decoupled in Army.h
+//  The Town class prototype derives from Object
+//  Prototype details are decoupled in Town.h
 //  Decoupling codes make it very easy to manage programmatically
 //	##########################################################
 
 #include "OGLUtil.h"
-#include "Army.h"
+#include "Town.h"
 
-Army::Army(): Object(-1)
+Town::Town(): Object(-1)
 {
   vPos.x = 0.0f;
 	vPos.y = 0.0f;
@@ -20,7 +20,7 @@ Army::Army(): Object(-1)
   food = 0;
 }
 
-Army::Army(int _id, float origX, float origY, float origZ): Object(_id)
+Town::Town(int _id, float origX, float origY, float origZ): Object(_id)
 {
   // setting position
 	vPos.x = origX;
@@ -29,40 +29,40 @@ Army::Army(int _id, float origX, float origY, float origZ): Object(_id)
   food = 0;
 }
 
-Army::~Army()
+Town::~Town()
 {
-  cout<<"Army destroyed!"<<endl;
+  cout<<"Town destroyed!"<<endl;
 }
 
-void Army::render()
+void Town::render()
 {
 	// ** glIdentity must be called here so that
-	// the matrix transform is reset to identity matrix made to this Army
+	// the matrix transform is reset to identity matrix made to this Town
 	// so that it doesn't affect all other Armies later
 	// try removing this and see
 	glLoadIdentity();
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	DrawObject(1.0f, 0.0f, 0.0f);
+	DrawObject(0.0f, 0.0f, 0.0f);
 }
 
-void Army::update()
+void Town::update()
 {
 	autonomy();
 }
 
-void Army::autonomy()
+void Town::autonomy()
 {
 
 }
 
-Vector3f Army::getPosition()
+Vector3f Town::getPosition()
 {
 	return Vector3f(vPos.x, vPos.y, vPos.z);
 }
 
-void Army::DrawObject(float red, float green, float blue)
+void Town::DrawObject(float red, float green, float blue)
 {
 	glColor3f(red, green, blue);
 

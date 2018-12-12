@@ -4,35 +4,35 @@
 //	Email: genechng@gmail.com
 //	----------------------------------------------------------
 //
-//  The Army class prototype derives from Object
-//  Prototype details are decoupled in Army.h
+//  The Town class prototype derives from Object
+//  Prototype details are decoupled in Town.h
 //  Decoupling codes make it very easy to manage programmatically
 //	##########################################################
 
-#ifndef ARMY_H
-#define ARMY_H
+#ifndef TOWN_H
+#define TOWN_H
 
 #include "OGLUtil.h"
 #include "Object.h"
 
 /****************************** PROTOTYPES ******************************/
-class Army: public Object
+class Town: public Object
 {
 protected:
 	Vector3f 	vPos;    // position of the object
-  int food;   // amount of food carried by army
+  int food;   // amount of food stored in Town
 
 public:
   // ------------------- constructors destructors
-  Army();
-  Army(int _id, float origX, float origY, float origZ);
-  ~Army();
+  Town();
+  Town(int _id, float origX, float origY, float origZ);
+  ~Town();
 
   // ------------------- update functions
   void render();
   void update();
 
-  // ------------------- Army functions
+  // ------------------- Town functions
   void autonomy();
 
   // ------------------- movement functions

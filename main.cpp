@@ -38,7 +38,7 @@ SDL_RendererInfo displayRendererInfo;
 Army **Armys = new Army*[10];
 
 // background colour starts with black
-float r, g, b = 0.0f;
+float r, g, b = 0.8f;
 
 /****************************** MAIN METHOD ******************************/
 int main(int argc, char**argv)
