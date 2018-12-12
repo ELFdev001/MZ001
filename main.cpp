@@ -1,22 +1,17 @@
 //	##########################################################
-//	By Eugene Ch'ng | www.complexity.io | 2018
+//	By Philip Murgatroyd, building on an infrastructure created by
+//  Eugene Ch'ng | www.complexity.io | 2018
 //	Email: genechng@gmail.com
 //	----------------------------------------------------------
 //	A C++ Application
 //	OOP + OpenGL integration
 //
-//  This example shows how we can use an array to store multiple agents
-//  and processing them within the loop
+//  Kind of a strategy game, mainly created to practice C++
 //
 //  ----------------------------------------------------------
 //  How to compile:
-//  note that we are now using both SDL2 and OpenGL, thus the -l for all libraries
-//  we are also using multiple cpp files
 //  sudo g++ -I/usr/include/ main.cpp Agent.cpp Grid.cpp -o main -L/usr/lib -lSDL2 -lGL -lGLU
 //
-// -I define the path to the includes folder
-// -L define the path to the library folder
-// -l ask the compiler to use the library
 //	##########################################################
 
 #include <iostream>
