@@ -4,7 +4,7 @@
 //	Email: genechng@gmail.com
 //	----------------------------------------------------------
 //	A C++ Application
-//	OOP + OpenGL integration
+//	MZ001
 //
 //  Kind of a strategy game, mainly created to practice C++
 //
@@ -17,7 +17,6 @@
 #include <iostream>
 #include <string>
 #include "OGLUtil.h"
-#include "Grid.h"
 #include "Agent.h"
 using namespace std;
 
@@ -36,58 +35,21 @@ SDL_Window* displayWindow;
 SDL_Renderer* displayRenderer;
 SDL_RendererInfo displayRendererInfo;
 
-Grid *grid;			  // declare grid
-//Agent *creature;  // declare an agent
 Agent **agents = new Agent*[10];
 
 // background colour starts with black
 float r, g, b = 0.0f;
 
-// // Matrix for transformation
-// Matrix4x4 mPos; // for constructing the translation matrix of the square
-// Matrix4x4 mRot; // for constructing the rotation matrix of the square
-// // the vector is is used for representing the position of the square
-// Vector3f vPos;
-
-// flags for keycontrol and movement
-// "is moving forward", etc...
-// bool isForward, isBackward, isRight, isLeft = false;
-
-// Movement variables
-// float speed = 0.005f;               // speed of agent incrememnted on continual keypress
-// float maxSpeed = 0.1f;              // continuous key press increases speed to this max
-// float angle = 0.0f;                 // angle used for constructing rotation
-// float currAngle = 0.0f;             // actual angle used for the Matrix
-// float angleSpeed = 0.1f;           // incremental speed of rotation
-// float maxAngle = 0.4f;              // maximum rotation movement
-// float friction = 0.99f;             // sliding friction to a stop
-// float movement = 0.0f;              // effective forward movement speed used in the matrix
-// float forwardZero = 0.0001f;        // threshold to set stop the translation (works with friction)
-// float angleZero = 0.001f;           // threshold to set stop the rotation (works with friction)
-
 /****************************** MAIN METHOD ******************************/
 int main(int argc, char**argv)
 {
-    //  instantiate grid
-    float gridWidth = 50.0f;
-    float gridLength = 50.0f;
-    float gridSpacing = 5.0f;
-    grid = new Grid(gridWidth, gridLength, gridSpacing);
-
-    // instantiate the creature, speed at 0.001f OpenGL scale
-    // creature = new Agent(1, 0, 0, 0, 0.001f);
-    // creature->getGrid(*grid); // deference grid and pass by reference
-
     // instantiate n agents and assign them arbitrary speed
-    int agentNo = 100;
+    int agentNo = 1;
     Agent agents[agentNo];
     for(int i = 0; i < agentNo; i++)
     {
       float r = (rand() % 100) / 1000; // randomise the speed (0 - 0.099f)
       agents[i] = Agent(i, 0, 0, 0, r);
-      agents[i].getGrid(*grid);
-
-      //cout<<"agent["<<i<<"] "<<agents[i]<<endl;
     }
 
     cout<<"*********************** Begin SDL OpenGL ***********************"<<endl;
@@ -155,15 +117,6 @@ int main(int argc, char**argv)
           // render the scene
           renderScene();
 
-          // grid rendering
-          grid->render();
-
-          // the autonomy() method is called in update
-          // creature->update();
-          // creature->render();
-          //Vector3f p = creature->getPosition();
-          //cout<<"creature at:"<<p.x<<","<<p.y<<","<<p.z<<endl;
-
           // run through the agents and call their functions
           for(int i = 0; i < agentNo; i++)
           {
@@ -186,12 +139,6 @@ int main(int argc, char**argv)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
     cout<<"------- Cleaning Up Memory"<<endl;
-    // all codes to clean up memory HERE
-    //delete creature;
-    // for(int i = 0; i < agentNo; i++)
-    //   delete agents[i];
-
-    delete grid;
 
     // Destroy window
     SDL_DestroyWindow(displayWindow);
