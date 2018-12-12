@@ -10,14 +10,14 @@
 //
 //  ----------------------------------------------------------
 //  How to compile:
-//  sudo g++ -I/usr/include/ main.cpp Agent.cpp Grid.cpp -o main -L/usr/lib -lSDL2 -lGL -lGLU
+//  sudo g++ -I/usr/include/ main.cpp Army.cpp Grid.cpp -o main -L/usr/lib -lSDL2 -lGL -lGLU
 //
 //	##########################################################
 
 #include <iostream>
 #include <string>
 #include "OGLUtil.h"
-#include "Agent.h"
+#include "Army.h"
 using namespace std;
 
 /****************************** PROTOTYPES ******************************/
@@ -35,7 +35,7 @@ SDL_Window* displayWindow;
 SDL_Renderer* displayRenderer;
 SDL_RendererInfo displayRendererInfo;
 
-Agent **agents = new Agent*[10];
+Army **Armys = new Army*[10];
 
 // background colour starts with black
 float r, g, b = 0.0f;
@@ -43,13 +43,12 @@ float r, g, b = 0.0f;
 /****************************** MAIN METHOD ******************************/
 int main(int argc, char**argv)
 {
-    // instantiate n agents and assign them arbitrary speed
-    int agentNo = 1;
-    Agent agents[agentNo];
-    for(int i = 0; i < agentNo; i++)
+    // instantiate n Armys and assign them arbitrary speed
+    int ArmyNo = 1;
+    Army Armys[ArmyNo];
+    for(int i = 0; i < ArmyNo; i++)
     {
-      float r = (rand() % 100) / 1000; // randomise the speed (0 - 0.099f)
-      agents[i] = Agent(i, 0, 0, 0, r);
+      Armys[i] = Army(i, 0, 0, 0);
     }
 
     cout<<"*********************** Begin SDL OpenGL ***********************"<<endl;
@@ -117,11 +116,11 @@ int main(int argc, char**argv)
           // render the scene
           renderScene();
 
-          // run through the agents and call their functions
-          for(int i = 0; i < agentNo; i++)
+          // run through the Armys and call their functions
+          for(int i = 0; i < ArmyNo; i++)
           {
-            agents[i].update();
-            agents[i].render();
+            Armys[i].update();
+            Armys[i].render();
           }
 
 
@@ -159,7 +158,7 @@ void checkKeyPress()
       // Close the window X
       if(event.type == SDL_QUIT) isRunning = false;
 
-      // ** we have removed all controls for the agent now
+      // ** we have removed all controls for the Army now
       if ( event.type == SDL_KEYDOWN )
       {
         // if escape key is pressed

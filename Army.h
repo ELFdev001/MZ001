@@ -4,34 +4,34 @@
 //	Email: genechng@gmail.com
 //	----------------------------------------------------------
 //
-//  The Agent class prototype derives from Object
-//  Prototype details are decoupled in Agent.h
+//  The Army class prototype derives from Object
+//  Prototype details are decoupled in Army.h
 //  Decoupling codes make it very easy to manage programmatically
 //	##########################################################
 
-#ifndef AGENT_H
-#define AGENT_H
+#ifndef ARMY_H
+#define ARMY_H
 
 #include "OGLUtil.h"
 #include "Object.h"
 
 /****************************** PROTOTYPES ******************************/
-class Agent: public Object
+class Army: public Object
 {
 protected:
 	Vector3f 	vPos;    // position of the object
 
 public:
   // ------------------- constructors destructors
-  Agent();
-  Agent(int _id, float origX, float origY, float origZ, float speed);
-  ~Agent();
+  Army();
+  Army(int _id, float origX, float origY, float origZ);
+  ~Army();
 
   // ------------------- update functions
   void render();
   void update();
 
-  // ------------------- agent functions
+  // ------------------- Army functions
   void autonomy();
 
   // ------------------- movement functions
