@@ -18,15 +18,17 @@ Town::Town(): Object(-1)
 	vPos.y = 0.0f;
 	vPos.z = 0.0f;
   food = 0;
+  name = "";
 }
 
-Town::Town(int _id, float origX, float origY, float origZ): Object(_id)
+Town::Town(int _id, float origX, float origY, float origZ, string tname): Object(_id)
 {
   // setting position
 	vPos.x = origX;
 	vPos.y = origY;
 	vPos.z = origZ;
   food = 0;
+  name = tname;
 }
 
 Town::~Town()
@@ -45,6 +47,7 @@ void Town::render()
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	DrawObject(0.0f, 0.0f, 0.0f);
+  DrawName(0.0f, 0.0f, 0.0f);
 }
 
 void Town::update()
@@ -68,10 +71,17 @@ void Town::DrawObject(float red, float green, float blue)
 
 	glLineWidth(3.0f);
 	glBegin(GL_POLYGON);
-		glVertex3f(0.5f, 0.0f, 0.5f);
-		glVertex3f(-0.5f, 0.0f, 0.5f);
-		glVertex3f(-0.5f, 0.0f, -0.5f);
-    glVertex3f(0.5f, 0.0f, -0.5f);
+		glVertex3f(vPos.x + 0.5f, vPos.y + 0.5f, vPos.z + 0.0f);
+		glVertex3f(vPos.x + -0.5f, vPos.y + 0.5f, vPos.z + 0.0f);
+		glVertex3f(vPos.x + -0.5f, vPos.y + -0.5f, vPos.z + 0.0f);
+    glVertex3f(vPos.x + 0.5f, vPos.y + -0.5f, vPos.z + 0.0f);
 	glEnd();
 	glLineWidth(0.2f);
+}
+
+void Town::DrawName(float red, float green, float blue)
+{
+  glRasterPos2i(vPos.x, vPos.y);
+  glColor4f(red, green, blue, 1.0f);
+  glutBitmapString(GLUT_BITMAP_HELVETICA_18, name);
 }

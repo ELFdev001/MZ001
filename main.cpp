@@ -8,16 +8,13 @@
 //
 //  Kind of a strategy game, mainly created to practice C++
 //
-//  ----------------------------------------------------------
-//  How to compile:
-//  sudo g++ -I/usr/include/ main.cpp Army.cpp Grid.cpp -o main -L/usr/lib -lSDL2 -lGL -lGLU
-//
 //	##########################################################
 
 #include <iostream>
 #include <string>
 #include "OGLUtil.h"
 #include "Army.h"
+#include "Town.h"
 using namespace std;
 
 /****************************** PROTOTYPES ******************************/
@@ -36,20 +33,32 @@ SDL_Renderer* displayRenderer;
 SDL_RendererInfo displayRendererInfo;
 
 Army **Armys = new Army*[10];
+Town **Towns = new Town*[10];
 
-// background colour starts with black
-float r, g, b = 0.8f;
+// background colour starts with sand
+float r = 0.8f;
+float g = 0.8f;
+float b = 0.5f;
 
 /****************************** MAIN METHOD ******************************/
 int main(int argc, char**argv)
 {
-    // instantiate n Armys and assign them arbitrary speed
+    // instantiate n Armys
     int ArmyNo = 1;
     Army Armys[ArmyNo];
     for(int i = 0; i < ArmyNo; i++)
     {
       Armys[i] = Army(i, 0, 0, 0);
     }
+
+    // instantiate n Towns
+    Town Towns[6];
+    Towns[0] = Town(0, -30, -3, 0, "One");
+    Towns[1] = Town(0, -20, -2, 0, "Two");
+    Towns[2] = Town(0, -10, -1, 0, "Three");
+    Towns[3] = Town(0, 10, 1, 0, "Four");
+    Towns[4] = Town(0, 20, 2, 0, "Five");
+    Towns[5] = Town(0, 30, 3, 0, "Six");
 
     cout<<"*********************** Begin SDL OpenGL ***********************"<<endl;
 
@@ -121,6 +130,12 @@ int main(int argc, char**argv)
           {
             Armys[i].update();
             Armys[i].render();
+          }
+
+          for (int i = 0; i < 6; i++)
+          {
+            Towns[i].update();
+            Towns[i].render();
           }
 
 
@@ -238,11 +253,10 @@ int setViewport( int width, int height )
    	//                  GLdouble centerX, GLdouble centerY, GLdouble centerZ,
    	//                  GLdouble upX, GLdouble upY, GLdouble upZ);
     // the units below essentially looks down on a map view
-    // putting the eye 50 units above the origin
+    // putting the eye 80 units above the origin
     // looking at target at -10 units below the origin (looking down)
-    // up vector is Y
-    //gluLookAt(0.0f, 50.0f, 0.0f, 0.0f, -10.0f, -5.0f, 0.0f, 1.0f, 0.0f);
-    gluLookAt(0.0f, 80.0f, 0.0f, 0.0f, -10.0f, -0.01f, 0.0f, 1.0f, 0.0f);
+    // up vector is Z
+    gluLookAt(0.0f, 0.0f, 80.0f, 0.0f, -0.01f, -10.0f, 0.0f, 0.0f, 1.0f);
 
     // now switch to the MODELVIEW MATRIX so that we can control (transform)
     // everything we draw (rectangles, etc.)
@@ -260,11 +274,5 @@ void renderScene()
   glLoadIdentity();                                   // Reset the matrix
 
   glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-  /* ------------ START DRAW ALL OBJECTS HERE */
-
-	// DrawSquare(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f); // white
-
-  /* ------------ END DRAW ALL OBJECTS HERE */
 
 }

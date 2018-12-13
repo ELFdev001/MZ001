@@ -21,11 +21,12 @@ class Town: public Object
 protected:
 	Vector3f 	vPos;    // position of the object
   int food;   // amount of food stored in Town
+	string name; // name of Town
 
 public:
   // ------------------- constructors destructors
   Town();
-  Town(int _id, float origX, float origY, float origZ);
+  Town(int _id, float origX, float origY, float origZ, string tname);
   ~Town();
 
   // ------------------- update functions
@@ -40,6 +41,7 @@ public:
 
   // ------------------- visual representation function
   void DrawObject(float red, float green, float blue);
+	void DrawName(float red, float green, float blue);
 };
 
 #endif

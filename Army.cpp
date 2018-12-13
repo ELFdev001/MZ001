@@ -68,10 +68,10 @@ void Army::DrawObject(float red, float green, float blue)
 
 	glLineWidth(3.0f);
 	glBegin(GL_POLYGON);
-		glVertex3f(0.5f, 0.0f, 0.5f);
-		glVertex3f(-0.5f, 0.0f, 0.5f);
-		glVertex3f(-0.5f, 0.0f, -0.5f);
-    glVertex3f(0.5f, 0.0f, -0.5f);
+		glVertex3f(0.5f, 0.5f, 0.0f);
+		glVertex3f(-0.5f, 0.5f, 0.0f);
+		glVertex3f(-0.5f, -0.5f, 0.0f);
+    glVertex3f(0.5f, -0.5f, 0.0f);
 	glEnd();
 	glLineWidth(0.2f);
 }
