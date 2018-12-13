@@ -14,6 +14,7 @@
 
 #include "OGLUtil.h"
 #include "Object.h"
+#include <GL/freeglut.h>
 
 /****************************** PROTOTYPES ******************************/
 class Town: public Object

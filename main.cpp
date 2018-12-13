@@ -43,6 +43,7 @@ float b = 0.5f;
 /****************************** MAIN METHOD ******************************/
 int main(int argc, char**argv)
 {
+
     // instantiate n Armys
     int ArmyNo = 1;
     Army Armys[ArmyNo];

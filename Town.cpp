@@ -11,6 +11,7 @@
 
 #include "OGLUtil.h"
 #include "Town.h"
+#include <GL/freeglut.h>
 
 Town::Town(): Object(-1)
 {
@@ -81,7 +82,9 @@ void Town::DrawObject(float red, float green, float blue)
 
 void Town::DrawName(float red, float green, float blue)
 {
+  void glutInit(int *argcp, char **argv);
+
   glRasterPos2i(vPos.x, vPos.y);
   glColor4f(red, green, blue, 1.0f);
-  glutBitmapString(GLUT_BITMAP_HELVETICA_18, name);
+  glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*) name.c_str());
 }
