@@ -48,7 +48,7 @@ void Town::render()
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	DrawObject(0.0f, 0.0f, 0.0f);
-  DrawName(0.0f, 0.0f, 0.0f, &name);
+  DrawName(1.0f, 1.0f, 1.0f, &name);
 }
 
 void Town::update()
@@ -82,16 +82,9 @@ void Town::DrawObject(float red, float green, float blue)
 
 void Town::DrawName(float red, float green, float blue, string *namestr)
 {
-  int xadj = 20;
-  int yadj = 30;
-  int len = strlen(namestr->c_str());
+  int xadj = 1;
+  int yadj = 2;
+  glColor3f(red, green, blue);
   glRasterPos2i(vPos.x + xadj, vPos.y + yadj);
-  glColor4f(red, green, blue, 1.0f);
   glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*) namestr->c_str());
-
-  //for (int i = 0; i < len; i++)
-  //{
-  //  int j = (int) namestr[i];
-  //  glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, j);
-  //}
 }
