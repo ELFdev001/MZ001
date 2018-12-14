@@ -15,6 +15,7 @@
 #include "OGLUtil.h"
 #include "Army.h"
 #include "Town.h"
+#include <GL/freeglut.h>
 using namespace std;
 
 /****************************** PROTOTYPES ******************************/
@@ -43,6 +44,7 @@ float b = 0.5f;
 /****************************** MAIN METHOD ******************************/
 int main(int argc, char**argv)
 {
+    glutInit(&argc, argv);
 
     // instantiate n Armys
     int ArmyNo = 1;
