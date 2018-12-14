@@ -30,6 +30,7 @@ Town::Town(int _id, float origX, float origY, float origZ, string tname): Object
 	vPos.z = origZ;
   food = 0;
   name = tname;
+  *neighbours[5];
 }
 
 Town::~Town()

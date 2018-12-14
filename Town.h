@@ -23,6 +23,7 @@ protected:
 	Vector3f 	vPos;    // position of the object
   int food;   // amount of food stored in Town
 	string name; // name of Town
+	Town *neighbours[5];
 
 public:
   // ------------------- constructors destructors
