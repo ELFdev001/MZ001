@@ -20,15 +20,18 @@
 class Town: public Object
 {
 protected:
-	Vector3f 	vPos;    // position of the object
+	int x;
+	int y;
   int food;   // amount of food stored in Town
 	string name; // name of Town
 	Town *neighbours[5];
+	int neighcount;
+	int range;
 
 public:
   // ------------------- constructors destructors
   Town();
-  Town(int _id, float origX, float origY, float origZ, string tname);
+  Town(int _id, float origX, float origY, string tname);
   ~Town();
 
   // ------------------- update functions
@@ -36,14 +39,18 @@ public:
   void update();
 
   // ------------------- Town functions
-  void autonomy();
+	void setupneigh(Town alltowns[], int size);
 
   // ------------------- movement functions
-  Vector3f getPosition();
+  int getX();
+	int getY();
+	float getDistance(Town *fartown);
 
   // ------------------- visual representation function
   void DrawObject(float red, float green, float blue);
 	void DrawName(float red, float green, float blue, string *namestr);
+	void DrawLinks(float red, float green, float blue);
+
 };
 
 #endif

@@ -33,8 +33,8 @@ SDL_Window* displayWindow;
 SDL_Renderer* displayRenderer;
 SDL_RendererInfo displayRendererInfo;
 
-Army **Armys = new Army*[10];
-Town **Towns = new Town*[10];
+Army **Armys = new Army*[1];
+Town **Towns = new Town*[9];
 
 // background colour starts with sand
 float r = 0.8f;
@@ -55,13 +55,21 @@ int main(int argc, char**argv)
     }
 
     // instantiate n Towns
-    Town Towns[6];
-    Towns[0] = Town(0, -30, -3, 0, "One");
-    Towns[1] = Town(0, -20, -2, 0, "Two");
-    Towns[2] = Town(0, -10, -1, 0, "Three");
-    Towns[3] = Town(0, 10, 1, 0, "Four");
-    Towns[4] = Town(0, 20, 2, 0, "Five");
-    Towns[5] = Town(0, 30, 3, 0, "Six");
+    Town Towns[9];
+    Towns[0] = Town(0, 30, 0, "One");
+    Towns[1] = Town(0, 15, 10, "Two");
+    Towns[2] = Town(0, 15, -10, "Three");
+    Towns[3] = Town(0, 0, 0, "Four");
+    Towns[4] = Town(0, 0, 20, "Five");
+    Towns[5] = Town(0, 0, -20, "Six");
+    Towns[6] = Town(0, -15, 10, "Seven");
+    Towns[7] = Town(0, -15, -10, "Eight");
+    Towns[8] = Town(0, -30, 0, "Nine");
+
+    for (int i = 0; i < sizeof(Towns)/sizeof(Towns[0]); i++)
+    {
+      Towns[i].setupneigh(Towns, sizeof(Towns)/sizeof(Towns[0]));
+    }
 
     cout<<"*********************** Begin SDL OpenGL ***********************"<<endl;
 
@@ -135,7 +143,7 @@ int main(int argc, char**argv)
             Armys[i].render();
           }
 
-          for (int i = 0; i < 6; i++)
+          for (int i = 0; i < sizeof(Towns)/sizeof(Towns[0]); i++)
           {
             Towns[i].update();
             Towns[i].render();
