@@ -28,7 +28,7 @@ Town::Town(int _id, float origX, float origY, string tname): Object(_id)
 	y = origY;
 	food = 0;
   name = tname;
-  std::vector<Town> neighbours(9);
+  std::vector<int> neighbours;
 }
 
 Town::~Town()
@@ -36,7 +36,7 @@ Town::~Town()
   cout<<"Town destroyed!"<<endl;
 }
 
-void Town::render()
+void Town::render(vector<Town> towndata)
 {
 	// ** glIdentity must be called here so that
 	// the matrix transform is reset to identity matrix made to this Town
@@ -48,7 +48,7 @@ void Town::render()
 
 	DrawObject(0.0f, 0.0f, 0.0f);
   DrawName(1.0f, 1.0f, 1.0f, &name);
-  DrawLinks(1.0f, 1.0f, 1.0f);
+  DrawLinks(1.0f, 1.0f, 1.0f, towndata);
 }
 
 void Town::update()
@@ -66,24 +66,14 @@ int Town::getY()
   return y;
 }
 
-void Town::addNeighbour(Town *neigh)
+void Town::addNeighbour(int neigh)
 {
-  cout << "Adding neighbour ";
-  neigh->printtown();
-  neighbours->push_back(*neigh);
+  neighbours.push_back(neigh);
 }
 
-vector<Town>* Town::getNeighbours()
+vector<int> Town::getNeighbours()
 {
   return neighbours;
-}
-
-float Town::getDistance(Town *fartown)
-{
-  float distx = (fartown->getX() - x) ^2;
-  float disty = (fartown->getY() - y) ^2;
-  float distance = sqrt(distx - disty);
-  return distance;
 }
 
 void Town::DrawObject(float red, float green, float blue)
@@ -100,17 +90,17 @@ void Town::DrawObject(float red, float green, float blue)
 	glLineWidth(0.2f);
 }
 
-void Town::DrawLinks(float red, float green, float blue)
+void Town::DrawLinks(float red, float green, float blue, vector<Town> towndata)
 {
   glColor3f(red, green, blue);
 
   glLineWidth(3.0f);
 
-  for (int i = 0; i < neighbours->size(); i++)
+  for (int i : neighbours)
   {
     glBegin(GL_LINES);
       glVertex3f(x, y, 0.0f);
-      glVertex3f(neighbours->at(i).getX(), neighbours->at(i).getY(), 0.0f);
+      glVertex3f(towndata.at(i).getX(), towndata.at(i).getY(), 0.0f);
     glEnd();
   }
 

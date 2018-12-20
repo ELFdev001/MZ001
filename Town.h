@@ -25,7 +25,7 @@ protected:
 	int y;
   int food;   // amount of food stored in Town
 	string name; // name of Town
-	std::vector<Town> *neighbours;
+	std::vector<int> neighbours;
 
 public:
   // ------------------- constructors destructors
@@ -34,23 +34,22 @@ public:
   ~Town();
 
   // ------------------- update functions
-  void render();
+  void render(vector<Town> towndata);
   void update();
 
   // ------------------- Town functions
-	void addNeighbour(Town *neigh);
-	vector<Town>* getNeighbours();
+	void addNeighbour(int neigh);
+	vector<int> getNeighbours();
 	void printtown();
 
   // ------------------- movement functions
   int getX();
 	int getY();
-	float getDistance(Town *fartown);
 
   // ------------------- visual representation function
   void DrawObject(float red, float green, float blue);
 	void DrawName(float red, float green, float blue, string *namestr);
-	void DrawLinks(float red, float green, float blue);
+	void DrawLinks(float red, float green, float blue, vector<Town> towndata);
 
 };
 

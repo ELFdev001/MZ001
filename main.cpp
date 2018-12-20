@@ -87,7 +87,7 @@ int main(int argc, char**argv)
           cout << "distance " << distance << endl;
           if (distance < range)
           {
-            Towns.at(i).addNeighbour(&Towns.at(j));
+            Towns.at(i).addNeighbour(j);
           }
         }
       }
@@ -165,7 +165,7 @@ int main(int argc, char**argv)
           for (int i = 0; i < Towns.size(); i++)
           {
             Towns[i].update();
-            Towns[i].render();
+            Towns[i].render(Towns);
           }
 
 
