@@ -15,6 +15,7 @@
 #include "OGLUtil.h"
 #include "Object.h"
 #include <GL/freeglut.h>
+#include <vector>
 
 /****************************** PROTOTYPES ******************************/
 class Town: public Object
@@ -24,9 +25,7 @@ protected:
 	int y;
   int food;   // amount of food stored in Town
 	string name; // name of Town
-	Town *neighbours[5];
-	int neighcount;
-	int range;
+	std::vector<Town> *neighbours;
 
 public:
   // ------------------- constructors destructors
@@ -39,7 +38,9 @@ public:
   void update();
 
   // ------------------- Town functions
-	void setupneigh(Town alltowns[], int size);
+	void addNeighbour(Town *neigh);
+	vector<Town>* getNeighbours();
+	void printtown();
 
   // ------------------- movement functions
   int getX();

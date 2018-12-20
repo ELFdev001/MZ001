@@ -19,7 +19,6 @@ Town::Town(): Object(-1)
 	y = 0.0f;
   food = 0;
   name = "";
-  range = 25;
 }
 
 Town::Town(int _id, float origX, float origY, string tname): Object(_id)
@@ -29,9 +28,7 @@ Town::Town(int _id, float origX, float origY, string tname): Object(_id)
 	y = origY;
 	food = 0;
   name = tname;
-  *neighbours[5];
-  neighcount = 0;
-  range = 25;
+  std::vector<Town> neighbours(9);
 }
 
 Town::~Town()
@@ -59,20 +56,6 @@ void Town::update()
 
 }
 
-void Town::setupneigh(Town alltowns[], int size)
-{
-  for (int i = 0; i < size; i++)
-  {
-    if (Town::getDistance(&alltowns[i]) < range)
-    {
-      if (alltowns[i].getX() != x && alltowns[i].getY() != y) {
-        neighbours[neighcount] = &alltowns[i];
-        neighcount++;
-      }
-    }
-  }
-}
-
 int Town::getX()
 {
   return x;
@@ -81,6 +64,18 @@ int Town::getX()
 int Town::getY()
 {
   return y;
+}
+
+void Town::addNeighbour(Town *neigh)
+{
+  cout << "Adding neighbour ";
+  neigh->printtown();
+  neighbours->push_back(*neigh);
+}
+
+vector<Town>* Town::getNeighbours()
+{
+  return neighbours;
 }
 
 float Town::getDistance(Town *fartown)
@@ -111,15 +106,20 @@ void Town::DrawLinks(float red, float green, float blue)
 
   glLineWidth(3.0f);
 
-  for (int i = 0; i < neighcount; i++)
+  for (int i = 0; i < neighbours->size(); i++)
   {
     glBegin(GL_LINES);
       glVertex3f(x, y, 0.0f);
-      glVertex3f(neighbours[i]->getX(), neighbours[i]->getY(), 0.0f);
+      glVertex3f(neighbours->at(i).getX(), neighbours->at(i).getY(), 0.0f);
     glEnd();
   }
 
   glLineWidth(0.2f);
+}
+
+void Town::printtown()
+{
+    cout << "Town id: " << id << " Name: " << name << " x:" << x << " y:" << y << endl;
 }
 
 void Town::DrawName(float red, float green, float blue, string *namestr)

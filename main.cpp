@@ -16,6 +16,7 @@
 #include "Army.h"
 #include "Town.h"
 #include <GL/freeglut.h>
+#include <vector>
 using namespace std;
 
 /****************************** PROTOTYPES ******************************/
@@ -33,13 +34,16 @@ SDL_Window* displayWindow;
 SDL_Renderer* displayRenderer;
 SDL_RendererInfo displayRendererInfo;
 
-Army **Armys = new Army*[1];
-Town **Towns = new Town*[9];
+Army **thisarmy = new Army*;
+//Town **Towns = new Town*[9];
+vector<Town> Towns(9);
 
 // background colour starts with sand
 float r = 0.8f;
 float g = 0.8f;
 float b = 0.5f;
+
+int range = 25;
 
 /****************************** MAIN METHOD ******************************/
 int main(int argc, char**argv)
@@ -47,28 +51,46 @@ int main(int argc, char**argv)
     glutInit(&argc, argv);
 
     // instantiate n Armys
-    int ArmyNo = 1;
-    Army Armys[ArmyNo];
-    for(int i = 0; i < ArmyNo; i++)
-    {
-      Armys[i] = Army(i, 0, 0, 0);
-    }
+    Army thisarmy = Army(1, 20, 0, 0);
 
     // instantiate n Towns
-    Town Towns[9];
-    Towns[0] = Town(0, 30, 0, "One");
-    Towns[1] = Town(0, 15, 10, "Two");
-    Towns[2] = Town(0, 15, -10, "Three");
-    Towns[3] = Town(0, 0, 0, "Four");
-    Towns[4] = Town(0, 0, 20, "Five");
-    Towns[5] = Town(0, 0, -20, "Six");
-    Towns[6] = Town(0, -15, 10, "Seven");
-    Towns[7] = Town(0, -15, -10, "Eight");
-    Towns[8] = Town(0, -30, 0, "Nine");
+    Towns.at(0) = Town(1, 30, 0, "One");
+    Towns.at(1) = Town(2, 15, 10, "Two");
+    Towns.at(2) = Town(3, 15, -10, "Three");
+    Towns.at(3) = Town(4, 0, 0, "Four");
+    Towns.at(4) = Town(5, 0, 20, "Five");
+    Towns.at(5) = Town(6, 0, -20, "Six");
+    Towns.at(6) = Town(7, -15, 10, "Seven");
+    Towns.at(7) = Town(8, -15, -10, "Eight");
+    Towns.at(8) = Town(9, -30, 0, "Nine");
 
-    for (int i = 0; i < sizeof(Towns)/sizeof(Towns[0]); i++)
+    for (int i = 0; i < Towns.size(); i++)
     {
-      Towns[i].setupneigh(Towns, sizeof(Towns)/sizeof(Towns[0]));
+      cout << "Setting up neighbours for town " << i << endl;
+      for (int j = 0; j < Towns.size(); j++)
+      {
+        if (i != j)
+        {
+          Towns.at(i).printtown();
+          Towns.at(j).printtown();
+          cout << "dist between " << i << " and " << j << endl;
+
+          int dx = Towns.at(i).getX() - Towns.at(j).getX();
+          float distx = abs(dx) * abs(dx);
+          cout << "distx " << distx << endl;
+
+          int dy = Towns.at(i).getY() - Towns.at(j).getY();
+          float disty = abs(dy) * abs(dy);
+          cout << "disty " << disty << endl;
+
+          float distance = sqrt(distx + disty);
+          cout << "distance " << distance << endl;
+          if (distance < range)
+          {
+            Towns.at(i).addNeighbour(&Towns.at(j));
+          }
+        }
+      }
     }
 
     cout<<"*********************** Begin SDL OpenGL ***********************"<<endl;
@@ -136,14 +158,11 @@ int main(int argc, char**argv)
           // render the scene
           renderScene();
 
-          // run through the Armys and call their functions
-          for(int i = 0; i < ArmyNo; i++)
-          {
-            Armys[i].update();
-            Armys[i].render();
-          }
+          // call Army's functions
+          thisarmy.update();
+          thisarmy.render();
 
-          for (int i = 0; i < sizeof(Towns)/sizeof(Towns[0]); i++)
+          for (int i = 0; i < Towns.size(); i++)
           {
             Towns[i].update();
             Towns[i].render();
