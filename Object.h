@@ -29,6 +29,7 @@ public:
   virtual void update () = 0;
 
   // destructor
-  ~Object(){ cout<< "Object destroyed: " <<id<<endl; }
+  //~Object(){ cout<< "Object destroyed: " <<id<<endl; }
+  ~Object(){};
 };
 #endif

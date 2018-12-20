@@ -51,7 +51,7 @@ int main(int argc, char**argv)
     glutInit(&argc, argv);
 
     // instantiate n Armys
-    Army thisarmy = Army(1, 20, 0, 0);
+    Army thisarmy = Army(101, 30, 0);
 
     // instantiate n Towns
     Towns.at(0) = Town(1, 30, 0, "One");
@@ -71,20 +71,11 @@ int main(int argc, char**argv)
       {
         if (i != j)
         {
-          Towns.at(i).printtown();
-          Towns.at(j).printtown();
-          cout << "dist between " << i << " and " << j << endl;
-
           int dx = Towns.at(i).getX() - Towns.at(j).getX();
           float distx = abs(dx) * abs(dx);
-          cout << "distx " << distx << endl;
-
           int dy = Towns.at(i).getY() - Towns.at(j).getY();
           float disty = abs(dy) * abs(dy);
-          cout << "disty " << disty << endl;
-
           float distance = sqrt(distx + disty);
-          cout << "distance " << distance << endl;
           if (distance < range)
           {
             Towns.at(i).addNeighbour(j);

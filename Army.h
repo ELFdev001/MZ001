@@ -19,13 +19,15 @@
 class Army: public Object
 {
 protected:
-	Vector3f 	vPos;    // position of the object
+	int x;    // position of the object
+	int y;
+
   int food;   // amount of food carried by army
 
 public:
   // ------------------- constructors destructors
   Army();
-  Army(int _id, float origX, float origY, float origZ);
+  Army(int _id, int origX, int origY);
   ~Army();
 
   // ------------------- update functions
@@ -36,7 +38,8 @@ public:
   void autonomy();
 
   // ------------------- movement functions
-  Vector3f getPosition();
+  int getX();
+	int getY();
 
   // ------------------- visual representation function
   void DrawObject(float red, float green, float blue);

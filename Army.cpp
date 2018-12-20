@@ -14,18 +14,16 @@
 
 Army::Army(): Object(-1)
 {
-  vPos.x = 0.0f;
-	vPos.y = 0.0f;
-	vPos.z = 0.0f;
-  food = 0;
+  x = 0;
+	y = 0;
+	food = 0;
 }
 
-Army::Army(int _id, float origX, float origY, float origZ): Object(_id)
+Army::Army(int _id, int origX, int origY): Object(_id)
 {
   // setting position
-	vPos.x = origX;
-	vPos.y = origY;
-	vPos.z = origZ;
+	x = origX;
+	y = origY;
   food = 0;
 }
 
@@ -57,9 +55,14 @@ void Army::autonomy()
 
 }
 
-Vector3f Army::getPosition()
+int Army::getX()
 {
-	return Vector3f(vPos.x, vPos.y, vPos.z);
+  return x;
+}
+
+int Army::getY()
+{
+  return y;
 }
 
 void Army::DrawObject(float red, float green, float blue)
@@ -68,10 +71,10 @@ void Army::DrawObject(float red, float green, float blue)
 
 	glLineWidth(3.0f);
 	glBegin(GL_POLYGON);
-		glVertex3f(0.5f, 0.5f, 0.0f);
-		glVertex3f(-0.5f, 0.5f, 0.0f);
-		glVertex3f(-0.5f, -0.5f, 0.0f);
-    glVertex3f(0.5f, -0.5f, 0.0f);
+		glVertex3f(x + 0.5f, y + 0.5f, 0.1f);
+		glVertex3f(x + -0.5f, y + 0.5f, 0.1f);
+		glVertex3f(x + -0.5f, y + -0.5f, 0.1f);
+    glVertex3f(x + 0.5f, y + -0.5f, 0.1f);
 	glEnd();
 	glLineWidth(0.2f);
 }

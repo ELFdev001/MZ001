@@ -33,7 +33,7 @@ Town::Town(int _id, float origX, float origY, string tname): Object(_id)
 
 Town::~Town()
 {
-  cout<<"Town destroyed!"<<endl;
+  //cout<<"Town destroyed!"<<endl;
 }
 
 void Town::render(vector<Town> towndata)
