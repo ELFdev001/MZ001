@@ -153,12 +153,11 @@ int main(int argc, char**argv)
           thisarmy.update();
           thisarmy.render();
 
-          for (int i = 0; i < Towns.size(); i++)
+          for (auto y : Towns)
           {
-            Towns[i].update();
-            Towns[i].render(Towns);
+            y.update();
+            y.render(Towns);
           }
-
 
           // Update window with OpenGL rendering
           SDL_GL_SwapWindow(displayWindow);
