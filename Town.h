@@ -34,7 +34,7 @@ public:
   ~Town();
 
   // ------------------- update functions
-  void render(vector<Town> towndata);
+  void render(Town *towns);
   void update();
 
   // ------------------- Town functions
@@ -49,7 +49,7 @@ public:
   // ------------------- visual representation function
   void DrawObject(float red, float green, float blue);
 	void DrawName(float red, float green, float blue, string *namestr);
-	void DrawLinks(float red, float green, float blue, vector<Town> towndata);
+	void DrawLinks(float red, float green, float blue, Town *towns);
 
 };
 

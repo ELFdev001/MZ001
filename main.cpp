@@ -36,7 +36,9 @@ SDL_RendererInfo displayRendererInfo;
 
 Army **thisarmy = new Army*;
 //Town **Towns = new Town*[9];
-vector<Town> Towns(9);
+//vector<Town> Towns(9);
+const int townsize = 9;
+Town towns[townsize];
 
 // background colour starts with sand
 float r = 0.8f;
@@ -54,7 +56,7 @@ int main(int argc, char**argv)
     Army thisarmy = Army(101, 30, 0);
 
     // instantiate n Towns
-    Towns.at(0) = Town(1, 30, 0, "One");
+    /*Towns.at(0) = Town(1, 30, 0, "One");
     Towns.at(1) = Town(2, 15, 10, "Two");
     Towns.at(2) = Town(3, 15, -10, "Three");
     Towns.at(3) = Town(4, 0, 0, "Four");
@@ -62,23 +64,34 @@ int main(int argc, char**argv)
     Towns.at(5) = Town(6, 0, -20, "Six");
     Towns.at(6) = Town(7, -15, 10, "Seven");
     Towns.at(7) = Town(8, -15, -10, "Eight");
-    Towns.at(8) = Town(9, -30, 0, "Nine");
+    Towns.at(8) = Town(9, -30, 0, "Nine");*/
 
-    for (int i = 0; i < Towns.size(); i++)
+    towns[0] = Town(1, 30, 0, "One");
+    towns[1] = Town(2, 15, 10, "Two");
+    towns[2] = Town(3, 15, -10, "Three");
+    towns[3] = Town(4, 0, 0, "Four");
+    towns[4] = Town(5, 0, 20, "Five");
+    towns[5] = Town(6, 0, -20, "Six");
+    towns[6] = Town(7, -15, 10, "Seven");
+    towns[7] = Town(8, -15, -10, "Eight");
+    towns[8] = Town(9, -30, 0, "Nine");
+
+
+    for (int i = 0; i < townsize; i++)
     {
       cout << "Setting up neighbours for town " << i << endl;
-      for (int j = 0; j < Towns.size(); j++)
+      for (int j = 0; j < townsize; j++)
       {
         if (i != j)
         {
-          int dx = Towns.at(i).getX() - Towns.at(j).getX();
+          int dx = towns[i].getX() - towns[j].getX();
           float distx = abs(dx) * abs(dx);
-          int dy = Towns.at(i).getY() - Towns.at(j).getY();
+          int dy = towns[i].getY() - towns[j].getY();
           float disty = abs(dy) * abs(dy);
           float distance = sqrt(distx + disty);
           if (distance < range)
           {
-            Towns.at(i).addNeighbour(j);
+            towns[i].addNeighbour(j);
           }
         }
       }
@@ -153,10 +166,10 @@ int main(int argc, char**argv)
           thisarmy.update();
           thisarmy.render();
 
-          for (auto y : Towns)
+          for (int i = 0; i < townsize; i++)
           {
-            y.update();
-            y.render(Towns);
+            towns[i].update();
+            towns[i].render(towns);
           }
 
           // Update window with OpenGL rendering

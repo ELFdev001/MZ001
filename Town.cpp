@@ -36,7 +36,7 @@ Town::~Town()
   //cout<<"Town destroyed!"<<endl;
 }
 
-void Town::render(vector<Town> towndata)
+void Town::render(Town *towns)
 {
 	// ** glIdentity must be called here so that
 	// the matrix transform is reset to identity matrix made to this Town
@@ -48,7 +48,7 @@ void Town::render(vector<Town> towndata)
 
 	DrawObject(0.0f, 0.0f, 0.0f);
   DrawName(1.0f, 1.0f, 1.0f, &name);
-  DrawLinks(1.0f, 1.0f, 1.0f, towndata);
+  DrawLinks(1.0f, 1.0f, 1.0f, towns);
 }
 
 void Town::update()
@@ -90,7 +90,7 @@ void Town::DrawObject(float red, float green, float blue)
 	glLineWidth(0.2f);
 }
 
-void Town::DrawLinks(float red, float green, float blue, vector<Town> towndata)
+void Town::DrawLinks(float red, float green, float blue, Town *towns)
 {
   glColor3f(red, green, blue);
 
@@ -100,7 +100,7 @@ void Town::DrawLinks(float red, float green, float blue, vector<Town> towndata)
   {
     glBegin(GL_LINES);
       glVertex3f(x, y, 0.0f);
-      glVertex3f(towndata.at(i).getX(), towndata.at(i).getY(), 0.0f);
+      glVertex3f(towns[i].getX(), towns[i].getY(), 0.0f);
     glEnd();
   }
 
